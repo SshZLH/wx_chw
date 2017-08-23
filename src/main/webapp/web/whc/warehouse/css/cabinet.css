@@ -1,0 +1,427 @@
+/*theme:门店选柜菜单 ;
+ * author:lxy;
+ * data:2017-02-23;
+ * */
+body{
+	background:#ededed;
+	font-family:simhei;
+}
+.titleInfo{
+	width:7.5rem;
+	height:.96rem;
+	background:#fff;
+}
+.titLeft{
+	width:1.02rem;
+	height:.96rem;
+/*	line-height: .96rem;*/
+	/*text-align:center;*/
+	/*vertical-align: middle;*/
+	/*margin:0 auto;*/
+	float:left;
+	display: flex;
+  	justify-content: center;
+  	align-items: center; 
+}
+.return{
+	
+	width:.28rem;
+	height:.49rem;
+}
+.selCab{
+	width:5.37rem;
+	height:.96rem;
+	line-height:.96rem;
+	float:left;
+	font-size:.4rem;
+	color: #5e5e5e;
+	font-family: simhei;
+	text-align: center;
+}
+.phone{
+	width:1.11rem;
+	height:.96rem;
+	float:left;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+.phone img{
+	width:.31rem;
+	height:.41rem;
+}
+/*.roll{
+	width:7.5rem;
+	height:3.6rem;
+	background:blue;
+	margin-bottom:.1rem;
+}
+.roll img{
+	width:7.5rem;
+	height:3.6rem;
+}*/
+.det_banner{
+	width:7.5rem;
+	height:3.6rem;
+	position:relative;
+	overflow:hidden;
+	margin-bottom:.1rem;
+}
+.det_banner .slides li{
+	width:100%;
+	float:left;	
+}
+.det_banner .slides a{
+	display:block;
+	width:100%;	
+}
+.det_banner .slides img{
+	width:100%;
+	height:auto;	
+	display:block;
+}
+.det_banner .flex-direction-nav{
+	display:none;	
+}
+.det_banner .flex-control-nav{
+	width:95%;
+	height:0.6em;	
+	margin:0;
+	left:0;
+	bottom:1em;	
+	text-align:right;
+}
+.det_banner .flex-control-paging li a{
+	display:block;
+	background:#a0a0a0;
+	width:0.17rem;
+	height:0.17rem;
+	margin:1.3rem 0.04rem;	
+	border-radius:0.3em;
+	text-indent:9999px;
+	overflow:hidden;
+}
+.det_banner .flex-control-paging li a.flex-active{
+	background:#fff;	
+}
+.address{
+	background:#fff;
+	width:7.5rem;
+	height:.87rem;
+	margin-bottom:.02rem;
+}
+.addressTxt{
+	width:6.44rem;
+	height:.87rem;
+	line-height:.87rem;
+	color: #646464;
+	font-family: simhei;
+	text-indent:.23rem;
+	font-size:.36rem;
+	float:left;
+	
+}
+.addButton{
+	width:1.06rem;
+	height:.87rem;
+	float:left;
+	display: flex;
+  	justify-content: center;
+  	align-items: center; 
+}
+.addButton img{
+	width:.3rem;
+	height:.36rem;
+	
+}
+.CabiType{
+	width:7.5rem;
+	height:1.75rem;
+	background:#fff;
+	margin-bottom:.25rem;
+	position:relative;
+}
+.listype{
+	width:1.875rem;
+	height:1.75rem;
+	float:left;
+	
+}
+.tab{
+	width:1.875rem;
+	height:.05rem;
+	background:#03abee;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+.typeImg{
+	width:1.875rem;
+	height:.93rem;
+	display: flex;
+  	justify-content: center;
+  	align-items: center; 
+}
+.all{
+	width: .46rem;
+	height:.46rem;
+}
+.small{
+	width:.42rem;
+	height:.32rem;
+}
+.typeImg .medium{
+	width:.42rem;
+	height:.36rem;
+}
+.big{
+	width:.42rem;
+	height:.36rem;
+}
+.typeTxt{
+	width:1.875rem;
+	height:.3rem;
+	line-height:.3rem;
+	text-align: center;
+	font-family: simhei;
+	font-size:.36rem;
+	color:#646464;
+}
+.surplus{
+	width:1.875rem;
+	height:.52rem;
+	line-height:.52rem;
+	text-align:center;
+	font-size:.24rem;
+	font-family: simhei;
+	color: #a2a2a2;
+}
+.cabDiv{
+	width:7.5rem;
+}
+.cabStyle{
+	width:7.36rem;
+	float:right;
+	margin-bottom:1.5rem
+}
+.cabStyleList{
+	width:1.64rem;
+	height:1.16rem;
+	background:#fff;
+	margin-right:.2rem;
+	margin-bottom:.2rem;
+	float:left;
+	color:#939393;
+	font-family: simhei;
+}
+.active{
+	background:#00aaee;
+    color:#fff;
+    font-size:4rem
+}
+.top{
+	width:1.64rem;
+	height:.4rem;
+	position: relative;
+}
+.top_size{
+	font-size:.28rem;
+	position:absolute;
+	top:.08rem;
+	left:.16rem;
+	font-family: simhei;
+}
+.top_flog{
+	width:.34rem;
+	height:.38rem;
+	display:none;
+	line-height: .38rem;
+	font-size:.24rem;
+	text-align:center;
+	letter-spacing:0rem;
+	font-family:simhei;
+	color:#fff;
+	background-image: url(../img/reserve_flag.png);
+	background-size:.34rem .38rem;
+	position:absolute;
+	top:0;
+	right:0.05rem ;
+}
+.top_vip{
+	width:.34rem;
+	height:.38rem;
+	display:none;
+	line-height: .38rem;
+	font-size:.225rem;
+	text-align:center;
+	letter-spacing:0rem;
+	font-family:simhei;
+	color:#fff;
+	background-image: url(../img/reserve_flag.png);
+	background-size:.34rem .38rem;
+	position:absolute;
+	top:0;
+	right:0.05rem ;
+}
+.cabStyleList .medium{
+	width:1.64rem;
+	height:.3rem;
+	line-height:.3rem;
+	font-size:.3rem;
+	text-align:center;
+	font-family:simhei;
+}
+.transparent{
+	width:7.5rem;
+	height:100%;
+	z-index: 99;
+	background:#000;
+	opacity:.4;
+	display:none;
+	position:fixed;
+	top: 0;
+}
+.telDiv{
+	width:5.89rem;
+	height:3.2rem;
+	background:#fff;
+	z-index:999;
+	border-radius:3%;
+	position:fixed;
+	top:40%;
+	left:.8rem;
+	display:none;
+}
+.telDiv_top{
+	width:5.89rem;
+	height:2.03rem;
+	/*line-height:.6rem;*/
+	border-bottom:.02rem solid #d2d2d2;
+}
+.telDiv_top .p1{
+	font-size:.4rem;
+	width:5.89rem;
+	color:#000;
+	position:absolute;
+	top:.54rem;
+	text-align: center;
+}
+.telDiv_top .p2{
+	font-size:.4rem;
+	color:#000;
+	width:5.89rem;
+	position:absolute;
+	top:1.25rem;
+	text-align: center;
+}
+.telDiv_bottom{
+	width:5.89rem;
+	height:1.15rem;
+	
+}
+.telDiv_bottom .left{
+	width:2.945rem;
+	height:1.15rem;
+	line-height:1.15rem;
+	text-align:center;
+	color:#a9a9a9;
+	font-size:.4rem;
+	float: left;
+	border-right:.02rem solid #d2d2d2;
+}
+.telDiv_bottom .right{
+	width:2.9rem;
+	height:1.15rem;
+	line-height:1.15rem;
+	text-align:center;
+	color:#a9a9a9;
+	font-size:.4rem;
+	float:right;
+}
+.telDiv_bottom .right a{
+	color:#a9a9a9;
+}
+.bottom{
+	width:1.64rem;
+	height:.46rem;
+	line-height:.46rem;
+	font-size:.24rem;
+	text-align:center;
+}
+
+.footer{
+	width:7.5rem;
+	height:.98rem;
+	display:none;
+	line-height:.98rem;
+	background:#898989;
+	position: fixed;
+	bottom:0;
+	text-align: center;
+	font-size:.34rem;
+	color:#fff;
+}
+.footer2{
+	width:7.5rem;
+	height:.98rem;
+	display:none;
+	line-height:.98rem;
+	background:#00aaee;
+	position: fixed;
+	bottom:0;
+	text-align: center;
+	font-size:.34rem;
+	color:#fff;
+}
+.altTxt{
+	height:.7rem;
+	width:3.1rem;
+	background:#232323;
+	color:#fff;
+	font-size:.3rem;
+	position:fixed;
+	bottom:30%;
+	left:2.2rem;
+	text-align:center;
+	line-height:.7rem;
+	border-radius:.1rem;
+	opacity:1;
+	display:none;
+	z-index:15;
+
+}
+.altTxt2{
+	height:.7rem;
+	width:4.5rem;
+	background:#232323;
+	color:#fff;
+	font-size:.3rem;
+	position:fixed;
+	bottom:30%;
+	left:1.5rem;
+	text-align:center;
+	line-height:.7rem;
+	border-radius:.1rem;
+	opacity:1;
+	display:none;
+	z-index:15;
+}
+.altTxt3{
+	height:.7rem;
+	width:4.5rem;
+	background:#232323;
+	color:#fff;
+	font-size:.3rem;
+	position:fixed;
+	bottom:30%;
+	left:1.5rem;
+	text-align:center;
+	line-height:.7rem;
+	border-radius:.1rem;
+	opacity:1;
+	display:none;
+	z-index:15;
+}
+	
+
+

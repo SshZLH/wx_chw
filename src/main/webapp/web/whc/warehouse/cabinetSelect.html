@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>在线预订</title>
+    <link rel="stylesheet" href="css/cabinet.css"/>
+    <link rel="stylesheet" href="../common/css/init.css" />
+    <link rel="stylesheet" href="css/flexslider.css" />
+	<script src="../common/js/init.js"></script>
+	<script src="../common/js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery.flexslider-min.js"></script>
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script  href="http://www.jb51.net/" ></script>
+	<script>
+ 		var warehouseId = getUrlParameter("warehouseId");
+		var openId = getUrlParameter("openId");
+		var json;
+		var	cabineType;
+		var size;
+		var allcabi;
+		var bigcabi;
+		var medcabi;
+		var smacabi;
+		var waceId;
+		var wareStoped = false;
+		var jsonObject;
+		var clicksPhoneType;
+		if(navigator.userAgent.indexOf("Android") > -1){
+			//alert("安卓");
+			clicksPhoneType="安卓";
+		}
+		else if(navigator.userAgent.indexOf("iPhone") > -1){
+			clicksPhoneType="苹果";
+		}
+		else{
+			clicksPhoneType="其他";
+		}
+		function getNum(text){
+			var value = text.replace(/[^0-9]/ig,"");
+		}
+		function listAdd(){
+			$.ajax({
+				type:"post",
+			 	url:"/getWarehouseCellList",
+		        async:false,		        
+		        data:{
+					wahoId:warehouseId
+		        },
+		        success:function(message){
+
+		        	cabineType=message.data.warehouseCellCounts[0];
+		        	json=message.data;
+		        	$(".addressTxt").html(json.warehouses[0].name);
+		        	wareStoped = json.warehouses[0].status !="2";		//2 启 用
+		        	var cabStyle=document.getElementById("cabStyle");
+		        	for(var i=0;i<json.warehouseCellInfos.length;i++){
+		        		var cabinetList=document.createElement("div");
+		        		cabinetList.className='cabStyleList';
+		        								cabinetList.innerHTML='<div class="top">\
+												<div class="top_size">'+json.warehouseCellInfos[i].wahoceSize+'</div>\
+												<div class="top_flog">满</div>\
+												<div class="top_vip">VIP</div>\
+											   </div>\
+											   <div class="medium">'+json.warehouseCellInfos[i].wahoceNumber+'</div>\
+											   <div class="bottom">'+json.warehouseCellInfos[i].waceTimePrice+'元起</div>';
+											   cabStyle.appendChild(cabinetList);
+						if($(".top_size").eq(i).html()=='1'){
+							$(".top_size").eq(i).html('小');
+						}
+						if($(".top_size").eq(i).html()=='2'){
+							$(".top_size").eq(i).html('中');
+						}
+						if($(".top_size").eq(i).html()=='3'){
+							$(".top_size").eq(i).html('大');
+						}
+						if(json.warehouseCellInfos[i].wahoceStatus!='0'){
+							$(".top_flog").eq(i).css({display:"block"});
+							$(".cabStyleList").eq(i).addClass("noSelect");
+						}
+						if(json.warehouseCellInfos[i].wahoceKind=='2'){
+							$(".top_vip").eq(i).css({display:"block"});
+							$(".cabStyleList").eq(i).addClass("noSelect");
+						}																	   
+		        	}
+		        },
+		        error:function(msg){
+		        	alert("获取柜体失败："+ msg);
+		        }
+			})
+		}
+		$(function(){
+		 	listAdd();
+			//轮播图
+			var importUrl=globalVar.supportUrl+"app/whc/uploadFile/import/";
+			$.ajax({
+					type:"post",
+					url:"/ShowAdvByWace",
+					async:false,
+					data:{
+						wahoId:warehouseId,
+						openId:openId
+					},
+					success:function(msg){
+							//alert(msg);
+						jsonObject=msg.data;
+						//console.log(msg.data[0].imgUrl);
+						if(msg.code==10000){
+							//alert("成功");
+							$("#slImg2").attr("src",importUrl+msg.data[0].imgUrl);
+						}
+					}
+				})
+
+			//
+			//alert(i);
+
+			$("#slImg1").attr("src",importUrl+json.warehouses[0].image2);
+			//$("#slImg2").attr("src",importUrl+json.warehouses[0].image3);
+			$("#slImg3").attr("src",importUrl+json.warehouses[0].image4);
+			if(jsonObject.length>0){
+				$("#slImg2").attr("src",importUrl+jsonObject[0].imgUrl);
+			}
+			else{
+				$("#slImg2").attr("src",importUrl+json.warehouses[0].image3);
+				$("#slImg2").off('click');
+			};
+			var _activityId=jsonObject[0].activityId;
+			var _contentId=jsonObject[0].contentId;
+			if(jsonObject.length==0){
+				_activityId='';
+				_contentId='';
+			}
+			else{
+				_activityId=jsonObject[0].activityId;
+				_contentId=jsonObject[0].contentId;
+			};
+			$("#slImg2").on('click',function(){
+				//alert(warehouseId);
+				//alert(i);
+				//alert(json.advShowList[0].activityId);
+				$.ajax({
+					url:'/advClicks',
+					data:{
+						activityId:jsonObject[0].activityId,
+						contentId:jsonObject[0].contentId,
+						openId:openId,
+						clicksPhoneType:clicksPhoneType,
+						clicksUserIp:returnCitySN["cip"],
+						wahoId:warehouseId
+					},
+					type:'GET',
+					success:function(msg){
+						//alert(msg);
+						//alert(msg);
+						//alert("成功");
+						//console.log(msg);
+						window.location.href="/web/whc/warehouse/detailPage.html"
+					},
+					error:function(){
+						alert("advClicks失败");
+					}
+				})
+
+			});
+			$(".det_banner .flexslider").flexslider({
+				animation : "slide"
+			});
+			//返回门店列表
+			$(".titLeft").on('click',function(){
+				window.history.go(-1);
+			})
+		    //获取可用柜子数目
+			bigcabi=cabineType.bigCabi;
+			smacabi=cabineType.smaCabi;
+			medcabi=cabineType.medCabi;
+			allcabi=cabineType.allCabi;
+			$("#allcabi").html('可用'+allcabi+'个');
+			$("#smacabi").html('可用'+smacabi+'个');
+			$("#medcabi").html('可用'+medcabi+'个');
+			$("#bigcabi").html('可用'+bigcabi+'个');
+			//根据门店是否停用判断底部提示语言
+			if(wareStoped || allcabi =='0'){
+				$(".footer2").hide();
+				$(".footer").show();
+				if (wareStoped)
+					$(".footer").html("当前门店已停用，请稍后再试")
+				else 
+					$(".footer").html("当前柜体全满，请稍后再试")
+			}
+			else {
+				$(".footer").hide();
+				$(".footer2").show();
+			}
+    		//跳转到地图
+    		$(".addButton").on('click',function(){
+    			window.location.href="/web/whc/map/map.jsp?openId="+openId+"&warehouseId="+warehouseId;
+    		});
+    		/*点击全部、大中小型号柜子动态显示该类型的柜子信息*/	
+    		$(".listype").each(function(i){
+    			$(this).on('click',function(){
+    				if(i==0){
+    					$(".tab").animate({left:'0'});
+    					$(".small").attr('src','img/small.png');
+    					$('.typeTxt').eq(1).css({'color':'#646464'});
+    					$(".all").attr('src','img/reserve_all_black_blue_icon.png');
+    					$('.typeTxt').eq(0).css({'color':'#29b1ef'});
+    					$('.typeTxt').eq(2).css({'color':'#646464'});
+    					$(".medium").attr('src','img/medium.png');
+    					$(".big").attr('src','img/big.png');
+    					$('.typeTxt').eq(3).css({'color':'#646464'});
+    					$(".cabStyleList").each(function(i){
+    							$(".cabStyleList").eq(i).show();	
+    					})    					
+    				}
+    				if(i==1){
+    					$(".tab").animate({left:'1.875rem'});
+    					$('.typeTxt').eq(0).css({'color':'#646464'});
+    					$(".all").attr('src','img/all.png');
+    					$('.typeTxt').eq(1).css({'color':'#29b1ef'});
+    					$(".small").attr('src','img/reserve_small_blue_icon.png');
+    					$('.typeTxt').eq(2).css({'color':'#646464'});
+    					$(".medium").attr('src','img/medium.png');
+    					//$('.typeTxt').eq(1).css({'color':'#646464'});
+    					$(".cabStyleList").each(function(i){
+    						if($(".top_size").eq(i).html()=="小"){
+    							$(".cabStyleList").eq(i).show();
+    						}
+    						else{
+    							$(".cabStyleList").eq(i).hide();
+    						}
+    					})
+    				}
+    				if(i==2){
+    					$(".tab").animate({left:'3.75rem'});
+    					$('.typeTxt').eq(0).css({'color':'#646464'});
+    					$('.typeTxt').eq(1).css({'color':'#646464'});
+    					$(".all").attr('src','img/all.png');
+    					$(".small").attr('src','img/small.png');
+    					$('.typeTxt').eq(2).css({'color':'#29b1ef'});
+    					$(".medium").attr('src','img/reserve_medium_black_blue_icon.png');
+    					$(".big").attr('src','img/big.png');
+    					$('.typeTxt').eq(3).css({'color':'#646464'});
+    					$(".cabStyleList").each(function(i){
+    						if($(".top_size").eq(i).html()=="中"){
+    							$(".cabStyleList").eq(i).show();
+    						}
+    						else{
+    							$(".cabStyleList").eq(i).hide();
+    						}
+    					})
+    				}
+    				if(i==3){
+    					$(".tab").animate({left:'5.625rem'});
+    					$('.typeTxt').eq(0).css({'color':'#646464'});
+    					$('.typeTxt').eq(1).css({'color':'#646464'});
+    					$('.typeTxt').eq(2).css({'color':'#646464'});
+    					$(".all").attr('src','img/all.png');
+    					$(".small").attr('src','img/small.png');
+    					$(".medium").attr('src','img/medium.png');
+    					$('.typeTxt').eq(3).css({'color':'#29b1ef'});
+    					$(".big").attr('src','img/reserve_big_blue_icon.png');
+    					$(".cabStyleList").each(function(i){
+    						if($(".top_size").eq(i).html()=="大"){
+    							$(".cabStyleList").eq(i).show();
+    						}
+    						else{
+    							$(".cabStyleList").eq(i).hide();
+    						}
+    					})    					
+    				}
+    			})
+    		});
+    		//遍历柜体选项，使选中的样式发生改变。
+    		$(".cabStyleList").each(function(i){
+    			$(this).on('click',function(){
+    				if(json.warehouseCellInfos[i].wahoceKind=='2'){
+						setTimeout('$(".altTxt2").fadeIn("slow")',30);
+ 						setTimeout('$(".altTxt2").fadeOut("slow")',1200);
+    				}
+    				if(json.warehouseCellInfos[i].wahoceStatus!='0'&& json.warehouseCellInfos[i].wahoceKind!='2'){
+    					setTimeout('$(".altTxt3").fadeIn("slow")',30);
+ 						setTimeout('$(".altTxt3").fadeOut("slow")',1200);
+    				}
+    				if(json.warehouseCellInfos[i].wahoceStatus=='0'&& json.warehouseCellInfos[i].wahoceKind=='1'){
+    					$(this).addClass("active").siblings().removeClass("active");
+    					waceId=json.warehouseCellInfos[i].waceId;
+						$(".footer2").on('click',function(){
+							window.location.href="/web/whc/order/orderfill.html?wahoceId="+waceId+"&openId="+openId+"&wahoId="+warehouseId;
+						})
+    				}
+    			})
+    		})
+    		//获取所有的订单,如果没有选中任何一个的话,弹出提醒.
+				$(".footer2").on('click',function(){
+					if($('.active').length==0){
+						//$('.altTxt').show(500);
+						//$('.altTxt').hide(2500);
+						//$("#div2").fadeIn("slow");
+						setTimeout('$(".altTxt").fadeIn("slow")',30);
+ 						setTimeout('$(".altTxt").fadeOut("slow")',1200);
+					}
+				})
+		})
+	</script>
+</head>
+<body>
+	<!--头部信息-->
+<div class="titleInfo" id="headerDivID">
+	<div class="titLeft">
+	<img class="return" src="img/return.png">
+	</div>		 	
+	<div class="selCab">选择柜体</div>
+	<div class="phone" onclick="callCSPhone();">
+		<img class="telPhone" src="img/phone_icon.png">
+	</div>
+</div>
+	<!--banner-->
+		<!--det_banner 轮播图-->
+		<div class="det_banner"><!--几个banner图的比例要一样，最好尺寸也一样大-->	
+			<div class="flexslider">
+			  	<ul class="slides">
+				    <li><a href="#" target="_blank"><img id="slImg1" style="width:7.5rem;height:3.6rem" src="img/scroLoading.jpg" /></a></li>
+				    <li><a  target="_blank"><img id="slImg2" style="width:7.5rem;height:3.6rem" src="img/scroLoading.jpg" /></a></li>
+				    <li><a href="#" target="_blank"><img id="slImg3" style="width:7.5rem;height:3.6rem" src="img/scroLoading.jpg" /></a></li>    
+			  	</ul>
+			</div>	
+		</div>
+		<div class="line15"></div>
+	<!--det_banner 轮播图-->
+	<!---->
+	<div class="address">
+		<div class="addressTxt">
+			
+		</div>
+		<div class="addButton">
+			<img src="img/addButton.png"/>
+		</div>
+	</div>
+	<div class="CabiType" id="CabiType" style="z-index:12">
+		<div class="listype">
+			<div class="typeImg"><img src="img/reserve_all_black_blue_icon.png" class="all" /></div>
+			<div class="typeTxt" style="color:#29b1ef">全部</div>
+			<div id="allcabi" class="surplus">可用0个</div>
+			<div  class="tab"></div>
+		</div>
+		<div class="listype">
+			<div class="typeImg"><img src="img/small.png" class="small" /></div>
+			<div class="typeTxt">小柜</div>
+			<div id="smacabi" class="surplus">可用0个</div>
+		</div>
+		<div class="listype">
+			<div class="typeImg"><img src="img/medium.png" class="medium" /></div>
+			<div class="typeTxt">中柜</div>
+			<div id="medcabi" class="surplus">可用0个</div>
+		</div>
+		<div class="listype">
+			<div class="typeImg"><img src="img/big.png" class="big" /></div>
+			<div class="typeTxt">大柜</div>
+			<div id="bigcabi" class="surplus">可用0个</div>
+		</div>
+	</div>
+	<div class="cabDiv">
+		<div class="cabStyle" id="cabStyle" ></div>									
+	</div>
+	<div class="footer">当前柜体全满，请稍后再试</div>
+	<div class="footer2">下一步, 填写订单</div>
+	<div class="transparent"></div>
+	<div class="telDiv" id="telDivID" style="display: none;">
+	</div>
+	<div class="altTxt">请选柜后操作下一步</div>
+	<div class="altTxt2">
+		该柜为vip专属,请选择其它柜号
+	</div>
+	<div class="altTxt3">
+		该柜已被占用,请选择其它柜号
+	</div>
+<script type="text/javascript">
+	//initHeader("headerDivID", "选择柜体");
+	initCSPhone("telDivID");
+</script>
+<script>
+//吸顶条效果。
+	    function getPos(obj){
+            var l=0;
+            var t=0;
+            while(obj){
+                l+=obj.offsetLeft;
+                t+=obj.offsetTop;
+
+                obj=obj.offsetParent;
+            }
+            return {left: l, top: t};
+        }
+        window.onload = function () {
+            var oBox=document.getElementById('CabiType');
+            //var oBox2=document.getElementById('box2');
+
+            var top=getPos(oBox).top;
+            window.onscroll=function(){
+                var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+                if(scrollTop>=top){
+                    oBox.style.position='fixed';
+                    oBox.style.left=0;
+                    oBox.style.top=0;
+                   // oBox2.style.display='block';
+                }else{
+                    oBox.style.position='';
+                    //oBox2.style.display='none';
+                }
+            };
+        };
+</script>
+</body>
+</html>

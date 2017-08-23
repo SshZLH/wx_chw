@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>/web/index.html</welcome-file>
+  </welcome-file-list>
+
+  <!-- springmvc 配置 -->
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:applicationContext-mvc.xml</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>springmvc</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!-- 设置字符集 -->
+  <filter>
+  	<filter-name>encoding</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <!-- 配置 spring -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+	<!-- coreServlet微信公众号上配置的核心servlet -->
+	<servlet>
+		<servlet-name>coreServlet</servlet-name>
+		<servlet-class>
+			org.wss.weixin.action.impl.SampleWeixinServletImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>coreServlet</servlet-name>
+		<url-pattern>/coreServlet</url-pattern>
+	</servlet-mapping>
+	<!-- OAuth2Servlet -->
+	<servlet>
+		<servlet-name>oauth2Servlet</servlet-name>
+		<servlet-class>
+			org.wss.weixin.action.impl.SampleOAuth2ServletImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>oauth2Servlet</servlet-name>
+		<url-pattern>/oauth2Servlet</url-pattern>
+	</servlet-mapping>
+	<!-- OAuth2WarehouseServlet门店列表配置  -->
+	<servlet>
+		<servlet-name>oauth2WarehouseServlet </servlet-name>
+		<servlet-class>
+			wechat.oauth2.OAuth2WarehouseServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>oauth2WarehouseServlet </servlet-name>
+		<url-pattern>/oauth2WarehouseServlet </url-pattern>
+	</servlet-mapping>
+	<!-- oauth2MemberCenterServlet订单中心配置-->
+	<servlet>
+		<servlet-name>oauth2MemberCenterServlet</servlet-name>
+		<servlet-class>
+			wechat.oauth2.OAuth2MemberCenterServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>oauth2MemberCenterServlet</servlet-name>
+		<url-pattern>/oauth2MemberCenterServlet</url-pattern>
+	</servlet-mapping>
+	<!-- OAuth2IndexServlet 关于我们->微官网配置-->
+	<servlet>
+		<servlet-name>oauth2IndexServlet</servlet-name>
+		<servlet-class>
+			wechat.oauth2.OAuth2IndexServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>oauth2IndexServlet</servlet-name>
+		<url-pattern>/oauth2IndexServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 智能门店扫码程序-->
+	<servlet>
+		<servlet-name>intelligentWarehouseAction</servlet-name>
+		<servlet-class>
+			com.whc.wx.web.controller.warehouse.IntelligentWarehouseAction
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>intelligentWarehouseAction</servlet-name>
+		<url-pattern>/intelligentWarehouseAction</url-pattern>
+	</servlet-mapping>
+</web-app>

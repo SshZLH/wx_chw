@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="../common/css/init.css" />
+		<link rel="stylesheet" href="css/orderTail.css" />
+		<style>
+			.valueTxt{
+				color:#6f6f6f;  
+			}
+		</style>
+		<script type="text/javascript" src="/web/whc/common/js/init.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script>
+		//待支付
+			var orderId;
+			var url = location.search; //获取url中"?"符后的字串
+		   	var status;
+		   
+		   	   	//开门指令
+	   		function openDoor(orderId){
+	   			$.ajax({
+					type: "get",
+					async:false, 
+					data:{"orderId":orderId},
+					url:"orderAction!openCabinetByOrderId.do",
+					//url:"http://xxxxx.orderAction!openCabinetByOrderId.do",
+					success:function(msg){
+								 jsonOpen=eval("("+msg+")");	
+								 //alert(jsonOpen);
+								 console.log(jsonOpen);
+								 cabinetDoorNo = jsonOpen.cabinet.cabinetDoorNo;
+							},
+						error:function(msg){
+								 alert(msg);
+							}
+				});
+	   		}
+	   		
+	   		
+	   	function renewOrder(orderId,status){
+   			if (status=="0"){
+				var flag="0";
+				var parms=orderId+"-0";	//待支付 首次付费 
+			    var url = globalVar.baseUrl+"web/whc/warehouse/pay2.jsp";
+			    var appId = globalVar.appId; 
+			    var weixinUrl="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appId+"&redirect_uri="+url+"?parms="+parms+"&flag="+flag+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+			    window.location.href=weixinUrl;
+			}else{
+			
+				window.history.go(-1);
+			}
+   		}
+	   		
+	   		
+		   $(function(){
+		   		 if (url.indexOf("?") != -1) { 
+				      var str = url.substr(1);
+				      strs = str.split("&");
+				      var strName = strs[0];
+				      var strNamelist=strName.split("=");
+				      orderId=strNamelist[1];
+				      //alert("orderId:"+orderId);
+			   	}
+		 		$.ajax({
+			   		type: "get",
+					data:{"orderId":orderId},
+					url:"warehouse/getOrderInformation.do",
+					success:function(msg){
+							var json= msg.info;
+							appId = json.appId;
+							status = json.orderInfo.status;
+							var unitName = json.orderInfo.orderUnit=="1"?" 小时": json.orderInfo.orderUnit=="2"?" 天" :" 月";
+								$("#statuName_wacaName").html(json.orderInfo.wahoName);
+								$("#statuName_sizeName").html(json.orderInfo.wahoceNumber+"号柜子");
+								$("#contactPeo_txt").html(json.orderInfo.nickname);
+								$("#contactTel_txt").html(json.orderInfo.tel);
+								$("#moneySum").html(json.orderInfo.orderAmount+"元");
+								if(json.orderInfo.orderUnit=="1"){
+									$("#orderTimeValue").html(json.orderInfo.totalTimes+ unitName);
+								}else{
+									$("#orderTimeValue").html(json.orderInfo.orderNumber+ unitName);
+								}
+								$("#orderTime2").html(json.orderInfo.orderStartDate+"至"+json.orderInfo.orderEndDate);
+								$("#orderTimeEnd").html(json.orderInfo.orderEndDate);
+								$("#orderNmubers").html(json.orderInfo.orderId)
+								
+							},
+						error:function(msg){
+								 alert(msg.info);
+							}
+		   		});
+		   		
+		   		$(".openDorr").on('click',function(){
+					
+					openDoor(orderId);
+					window.location.href="/app/whc2/openSuccess/index.html?cabinetDoorNo="+cabinetDoorNo+"&orderId="+orderId;
+				});	
+				
+				
+				$(".titLeft").on('click',function(){
+				//window.location="/app/whc2/storeList/index.html";
+				window.history.go(-1);
+				});
+				
+				$("#go_Pay").on('click',function(){
+					renewOrder(orderId,status)
+				
+				})
+		   	})
+		</script>
+	</head>
+	<body>
+		<div class="titInfo">
+			<div class="titLeft">
+				<img class="return" src="img/return.png"/>
+			</div>
+			<div class="selCab">
+				订单详情
+			</div>
+			<div class="phone" onclick="callCSPhone2();">
+				<img class="telPhone" src="img/phone_icon.png"/>
+			</div>
+		</div>
+		<div class="statuName">
+			<div class="statuName_left">
+				<div class="waceName" id="statuName_wacaName"></div>
+				<div class="sizeName" id="statuName_sizeName"></div>
+			</div>
+			<div class="statuName_right"><img src="img/order_detail_tobepaid_icon.png" alt="" /></div>
+		</div>
+		<div class="contacts">
+			<div class="contacts_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos contactPeo">
+					<span class="keyTxt">联系人</span>
+					<p class="valueTxt" id="contactPeo_txt"></p>
+				</div>
+				<div class="pos contactTel">
+					<span class="keyTxt">联系电话</span>
+					<p class="valueTxt" id="contactTel_txt"></p>
+				</div>
+			</div>
+		</div>
+		<div class="orderNumber">
+			<div class="orders_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos amountMoney">
+					<span class="keyTxt">金额</span>
+					<p class="valueTxt" id="moneySum"></p>
+				</div>
+				<div class="pos orderTime">
+					<span class="keyTxt">时长</span>
+					<p class="valueTxt" id="orderTimeValue"></p>
+				</div>
+				<div class="pos orderTime2">
+					<span class="keyTxt">订单时间</span>
+					<p class="valueTxt" id="orderTime2"></p>
+				</div>
+				<div class="pos orderNmubers">
+					<span class="keyTxt">订单编号</span>
+					<p class="valueTxt" id="orderNmubers"></p>
+				</div>				
+			</div>
+		</div>
+		<div class="telDiv" id="telDivID" style="display: none;">
+		</div>
+		<div class="transparent2"></div>
+<!--		<div class="zfjl">支付记录</div>
+		<div>
+			
+		</div>-->
+		<div class="payButton" id="go_Pay" >去支付</div>
+		<script type="text/javascript">			
+			initCSPhone("telDivID");
+			function callCSPhone2(){
+				$(".transparent2").show();
+				$(".telDiv").show();
+				$(".telDiv .left").on('click',function(){
+					$(".transparent2").hide();
+					$(".telDiv").hide();
+				})
+			};
+	
+		</script>
+	</body>
+</html>

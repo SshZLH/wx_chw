@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>支付成功</title>
+    <link rel="stylesheet" href="../common/css/init.css" />
+    <link rel="stylesheet" href="../member/css/paySuccess.css"/>
+    <script src="../common/js/init.js"></script>
+	<script src="../common/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        var orderId= getUrlParameter("orderId");
+		var openId= getUrlParameter("openId");
+		var cabinetDoorNo= getUrlParameter("cabinetDoorNo");
+		//var orderId= getUrlParameter("orderId");
+		//alert(openId);
+		//alert(cabinetDoorNo);
+        openDoor(orderId);
+    	function openDoor(orderId){
+   			$.ajax({
+				type: "get",
+				data:{
+					"orderId":orderId,
+					"mark":"1"
+					},
+				url:"/openDoor/openDoorByOrderId",
+				//url:"http://xxxxx.orderAction!openCabinetByOrderId.do",
+				success:function(msg){
+					//alert("kkk");
+							 //jsonOpen=eval("("+msg+")");
+							 //alert(jsonOpen);
+							 console.log(msg);
+							// cabinetDoorNo = jsonOpen.cabinet.cabinetDoorNo;
+							 $(".transparent").hide();
+							 $(".CloseOrder").hide();
+						 	 window.location.href="/web/whc/member/openSuccess.html?cabinetDoorNo="+cabinetDoorNo+"&orderId="+orderId+"&openId="+openId;
+							 
+						},
+					error:function(msg){
+							 alert(msg);
+						}
+			});
+   		}
+   		
+    </script>
+</head>
+<body>
+	<div class="promptInfo">
+		<img src="../order/img/paid.png" class="paid" />
+		<div class="p1">开门中...</div>
+	</div>
+</body>
+</html>

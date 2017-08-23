@@ -1,0 +1,21 @@
+/*对页面样式进行初始化设定*/
+@charset "utf-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,table,tbody,p,th,td{ -webkit-text-size-adjust:none; margin: 0; padding: 0; border: none; -webkit-tap-highlight-color:rgba(0,0,0,0); font-size: 1em; font-family:simhei }
+html,body{ min-height:100%;}
+h1,h2,h3,h4,h5,h6,p,em,i,b,strong{ font-size:100%; word-wrap:break-word; font-weight: normal; font-style: normal;}
+img,input,button,a,select,textarea{ margin: 0; padding: 0; resize:none; border:none; outline:none; }
+img,li{ vertical-align: top;} 
+ol,ul,li{ list-style:none; } 
+a:active, a:focus{ outline:none; }
+a{color: #4c4948; text-decoration: none;}
+button::-moz-focus-inner,input::-moz-focus-inner{ padding:0; border:0; }
+table{ border-collapse:collapse; border-spacing:0; }
+th,td{ border: 1px solid #000; padding: 0;}
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix{ zoom:1; }
+
+/*---------------初始化结束------------------------*/
+
+
+
+

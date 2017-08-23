@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" type="text/css" href="css/init.css" />
+		<link rel="stylesheet" href="css/renewDetail.css" />
+		<link rel="stylesheet" href="../common/css/init.css" />
+		<script type="text/javascript" src="js/init.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script src="../common/js/init.js"></script>
+		<style>
+			.transparent{
+				width:7.5rem;
+				height:100%;
+				z-index: 99;
+				background:#000;
+				opacity:.7;
+				display:none;
+				position:fixed;
+				top: 0;
+			}
+			.valueTxt{
+				color:#6f6f6f;
+			}
+		</style>
+
+		<script>
+			var orderId;
+			var url = location.search; //获取url中"?"符后的字串
+			var orderInfo;
+		   $(function(){
+			    if (url.indexOf("?") != -1) { 
+				      var str = url.substr(1);
+				      strs = str.split("&");
+				      var strName = strs[0];
+				      var strNamelist=strName.split("=");
+				      orderId=strNamelist[1];
+			   	}
+		 		$.ajax({
+			   		type: "get",
+					data:{"orderId":orderId},
+					url:"/getOrderInformation",
+					success:function(msg){
+							var json= msg.info;
+							orderInfo = json.orderInfo.data.orderInfo[0];
+							var unitName = orderInfo.orderUnit=="1"?" 小时": orderInfo.orderUnit=="2"?" 天" :" 月";
+								$("#statuName_wacaName").html(orderInfo.wahoName);
+								$("#statuName_sizeName").html(orderInfo.wahoceNumber+"号柜子");
+								$("#contactPeo_txt").html(orderInfo.nickName);
+								$("#contactTel_txt").html(orderInfo.tel);
+								$("#moneySum").html(orderInfo.orderAmount+"元");
+								if(orderInfo.orderUnit=="1"){
+									$("#orderTimeValue").html(orderInfo.totalTimes+ unitName);
+								}else{
+									$("#orderTimeValue").html(orderInfo.orderNumber+ unitName);
+								}
+								$("#orderTime2").html(orderInfo.orderStartDate+"至"+orderInfo.orderEndDate);
+								$("#orderTimeEnd").html(orderInfo.orderReturnDate);
+								$("#orderNmubers").html(orderInfo.orderId)
+							},
+						error:function(msg){
+								 alert(msg.info);
+							}
+		   		});
+		   		$(".titLeft").on('click',function(){
+
+				window.history.go(-1);
+				})
+		   		$(".prenewButton").on('click',function(){
+
+   					window.location.href="/web/whc/member/renew.html?orderId="+orderId;
+				})
+		   	})
+		</script>
+	</head>
+	<body>
+		<div class="telDiv" id="telDivID" style="display: none;"></div>
+		<div class="transparent"></div>
+		<div class="titInfo">
+			<div class="titLeft">
+				<img class="return" src="img/return.png"/>
+			</div>
+			<div class="selCab">
+				订单详情
+			</div>
+			<div class="phone" onclick="callCSPhone();">
+				<img class="telPhone" src="img/phone_icon.png"/>
+			</div>
+		</div>
+		<div class="statuName">
+			<div class="statuName_left">
+				<div class="waceName" id="statuName_wacaName"></div>
+				<div class="sizeName" id="statuName_sizeName"></div>
+			</div>
+			<div class="statuName_right"><img src="img/order_detail_overtime_icon.png" alt="" /></div>
+		</div>
+		<div class="contacts">
+			<div class="contacts_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos contactPeo">
+					<span class="keyTxt">联系人</span>
+					<p class="valueTxt" id="contactPeo_txt"></p>
+				</div>
+				<div class="pos contactTel">
+					<span class="keyTxt">联系电话</span>
+					<p class="valueTxt" id="contactTel_txt"></p>
+				</div>
+			</div>
+		</div>
+		<div class="orderNumber">
+			<div class="orders_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos amountMoney">
+					<span class="keyTxt">金额</span>
+					<p class="valueTxt" id="moneySum"></p>
+				</div>
+				<div class="pos orderTime">
+					<span class="keyTxt">时长</span>
+					<p class="valueTxt" id="orderTimeValue"></p>
+				</div>
+				<div class="pos orderTime2">
+					<span class="keyTxt">订单时间</span>
+					<p class="valueTxt" id="orderTime2"></p>
+				</div>
+				<div class="pos orderNmubers">
+					<span class="keyTxt">订单编号</span>
+					<p class="valueTxt" id="orderNmubers"></p>
+				</div>				
+			</div>
+		</div>
+
+		<div class="prenewButton">续费</div>
+<script>
+initCSPhone("telDivID");
+			
+</script>
+	</body>
+</html>

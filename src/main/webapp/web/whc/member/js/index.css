@@ -1,0 +1,134 @@
+html,body{ height: 100%; }
+body{width: 100%;max-width: 640px;margin: 0 auto;font-size: 100%;background:#ffffff;line-height: 1.4;font-family: 'Microsoft YaHei';}
+ul,ol{ list-style: none outside none; margin: 0;padding: 0;}
+a{text-decoration: none;}
+img{ display: inline-block;border: 0 none; }
+.online{ width: 21.944444444444443%;position: fixed;top:55%;right: 0; }
+.online .onlineClose{ position: absolute;top:20%;right:0;width:25%;padding:3em 0; }
+.full{ width: 100%;display: block; }
+.top{ position: fixed;width: 100%;top:0;left:0;z-index:10000 }
+.menu{ width: 7.34375%; position: absolute;top:3em;right:5%;z-index:1001;}
+.menuPop{ display:none;background: #32364a;border-radius: 7px;padding: .5em 0;position: fixed;top:8em;right:4%;width: 22%;z-index:999; }
+.menuPop .list li{ width:100%;text-align: center;padding: .5em 0; }
+.menuPop .list li a{ color: #ee7700;font-size: 1.5em; }
+.menuPop .arrow{ position: absolute;top:-3%;right:10%;z-index:1;width:17.75%; }
+.page-mask{ display:none;position: absolute;top:0;left:0;width: 100%;background: rgba(0,0,0,0);min-height: 100%;z-index:998; }
+.block{ position: relative; }
+.block .btn{ position: absolute;top:0;left:0;width:24.84375%; }
+.block .btn1{ top:67%;left: 40% }
+.block .btn2{ top:59%;left: 39% }
+.block .btn3{ top:60.5%;left: 39% }
+.block .btn4{ top:57%;left: 39% }
+.block .btn5{ top:59%;left: 39% }
+.block .btn6{ top:89%;left: 39% }
+.menus{ position: fixed;bottom:1%;left: 5%;background: #282a37;border-radius: 5px;width: 90.9375%;padding: .5em 0; }
+.menus a{ float: left; }
+.menus .item1{ margin-left: 4.4673539518900345%; }
+.menus .item1,.menus .item3{ width: 29.553264604810998% }
+.menus .item2{ width: 34.36426116838488%; }
+.menus .shopselect{margin:0;padding:0;position:absolute;width:30%;left:3%;bottom:50px;border-radius:6px;background: #282a37;text-align:center;color:#eee;overflow:hidden;z-index:1000;display:none;}
+.menus .shopselect .shopInfo{
+	width:90%;
+	margin-left:5%;
+	text-align:center;
+	position:relative;
+	font-size:14px;
+	height:50px;
+	line-height:50px;
+}
+
+.shopselect .shopInfo a{
+	float:none;
+	clear:both;
+	width:100%;
+	color:#eee;
+}
+
+.menus .shopselect .firstA{
+	border-bottom:solid 1px  #eee;
+}
+
+.slide {
+    position: relative;
+    max-width: 720px;
+    overflow: hidden;
+    margin: 19% auto 0;
+}
+.slide:after {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: 50%;
+}
+.slide ul {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.slide li {
+    list-style: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.slide li:first-child {
+    z-index: 1;
+}
+.slide li img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.slide .dot {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 5;
+    font-size: 0;
+}
+.slide .dot span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 5px;
+    border: 1px solid #f6ac00;
+    background: #f6ac00;
+    border-radius: 50%;
+}
+.slide .dot .cur {
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+.index-menu{
+    width: 100%;
+    border-bottom: 3px solid #f6ac00;
+}
+.index-menu li {
+    width: 16.09375%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 6%;
+    margin-top: .5em;
+}
+.index-menu li img{
+    display: block;
+}
+.index-menu li a{
+    color:#aaaaaa;
+    font-size: 1.2em;
+}
+
+@media (max-width: 420px) { 
+	body{ font-size: 9px; }
+}

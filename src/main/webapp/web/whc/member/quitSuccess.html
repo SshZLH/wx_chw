@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>开柜成功</title>
+	<link rel="stylesheet" type="text/css" href="/web/whc/common/css/init.css?rnd="+ Math.random()+" />
+	<link rel="stylesheet" href="/web/whc/member/css/quitSuccess.css?rnd="+ Math.random()+"/>
+	<script type="text/javascript" src="/web/whc/common/js/init.js?rnd="+ Math.random()+"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script  href="http://www.jb51.net/" ></script>
+	<script src="/web/whc/member/js/quitSuccess.js?rnd="+ Math.random()+"></script>
+	</script>
+	<style>
+		.altTxtLine{
+			height:.7rem;
+			width:3.2rem;
+			background:#232323;
+			color:#fff;
+			font-size:.3rem;
+			position:fixed;
+			bottom:30%;
+			left:2.2rem;
+			text-align:center;
+			line-height:.7rem;
+			border-radius:.1rem;
+			opacity:1;
+			display:none;
+			z-index:99999;
+
+		}
+		.altTxtLine2{
+			height:.7rem;
+			width:3.2rem;
+			background:#232323;
+			color:#fff;
+			font-size:.3rem;
+			position:fixed;
+			bottom:30%;
+			left:2.2rem;
+			text-align:center;
+			line-height:.7rem;
+			border-radius:.1rem;
+			opacity:1;
+			display:none;
+			z-index:99999;
+
+		}
+	</style>
+</head>
+<body>
+<!-- 问题反馈-->
+<div class="altTxtLine">
+	请选择问题后再提交
+</div>
+<div class="altTxtLine2">
+	请反馈您的问题
+</div>
+<div class="feedBackCheck">
+	<img class="closeFeed" src="img/close.png"/>
+	<div class="feedDiv feedTitle">问题反馈</div>
+	<div class="feedDiv feedContent">
+		<span>无法开柜</span>
+		<div class="checkBtn"></div>
+	</div>
+	<div class="feedDiv feedContent">
+		<span>点错而结束订单</span>
+		<div class="checkBtn"></div>
+	</div>
+	<div class="feedDiv feedContent">
+		<span>网络延迟严重</span>
+		<div class="checkBtn"></div>
+	</div>
+	<div class="feedDiv feedContent">
+		<span>二维码识别差 </span>
+		<div class="checkBtn"></div>
+	</div>
+	<div class="feedDiv feedContent">
+		<span>其它</span>
+		<div class="checkBtn"></div>
+	</div>
+	<div class="txtArea">
+		<textarea maxLength="75">请描述您的问题</textarea>
+		<div class="count">
+			<span class="count1">0</span>
+			<span class="count2">/75</span>
+		</div>
+	</div>
+	<div class="feedDiv submit">提交</div>
+</div>
+
+<div class="titleInfo" id="headerDivID">
+
+</div>
+<div class="transparent"></div>
+<div class="telDiv" id="telDivID" style="display: none;">
+</div>
+<div class="promptInfo">
+	<img src="img/quit.png" class="quit" />
+	<div class="p1" id="center"></div>
+	<div class="p2">避免订单继续给您带来的损失取物后记得关门哦</div>
+
+</div>
+<div class="seeButton" id="feedBack">问题反馈</div>
+<div class="seeButton" id="seeOrder" >查看订单</div>
+<div id="tjtp" style="width:7.5rem;height:1.58rem;position:fixed;bottom:0;left:0"></div>
+<script>
+	initHeader("headerDivID", "退柜成功");
+	initCSPhone("telDivID");
+</script>
+</body>
+</html>

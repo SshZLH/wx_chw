@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>欢迎使用万户仓</title>
+		  <link rel="stylesheet" href="css/base.css" />
+    <style>
+        body{
+            background: #f3f3f3;
+        }
+        .logo11{
+            width: 78.125%;
+            margin: 12% auto 0;
+        }
+        .p1{
+            color: #f68b00;
+           
+            text-align: center;
+            margin-top: 10%;
+        }
+        .returns{
+            background: #f6ac00;
+            width: 50%;
+            padding: .5em 0;
+            color:#fff;
+            border-radius: 5px;
+            text-align: center;
+            display: block;
+            height: 100px；
+            
+            margin: 10% auto 0;
+        }
+    </style>
+		<script type="text/javascript">
+		function closeWindow(){
+			setInterval(function(){
+				WeixinJSBridge.invoke('closeWindow',{},function(res){
+				});
+			},20);
+		}
+	 	</script>
+	</head>
+	<body>
+		<center>
+			<h1>  <div align="center" style="margin-top: 30%">
+        <img src="img/logo11.jpg" style="width:90%" />
+    </div>
+
+    <p class="p1">扫码成功，门已开</p>
+
+    <input type="button" class="returns" onclick="closeWindow()" value="返回"><!--
+			
+				<input type="button" onclick="closeWindow()" value="返回"
+					style="width: 95%; background-color: #00aa05; border: none; color: #ffffff; height: 50px; font-size: 30px;" />
+			--></h1>
+		</center>
+	</body>
+</html>

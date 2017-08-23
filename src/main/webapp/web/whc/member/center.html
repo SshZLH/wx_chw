@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>订单中心</title>
+	<link rel="stylesheet" type="text/css" href="../common/css/init.css" />
+	<link rel="stylesheet" href="css/center.css" />
+	<script type="text/javascript" src="../common/js/init.js"></script>
+	<script type="text/javascript" src="../common/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../common/js/nav.js"></script>
+	<script type="text/javascript" src="js/center.js?rnd="+ Math.random()></script>
+
+	<script src="../common/js/nav.js"></script>
+
+	<script type="text/javascript" src="../common/js/nav.js"></script>
+
+</head>
+<body>
+	<div class="CloseOrder" style="border-radius:.1rem;">
+		<!--<div class="top1" style="border-top-left-radius:.1rem;border-top-right-radius:.1rem;">开锁后,是否结束订单?</div>-->
+
+		<div class="midium2">临时开锁 继续使用</div>
+		<div class="midium1"><span>取走物品 结束订单</span></div>
+	</div>
+	<div class="qxzh" style="margin-top:.3rem;border-radius:.1rem;z-index:9999">取消</div>
+	<div class="transparent"></div>
+		<!--<img src="img/head.jpg" class="blur" style="width:100%;height: 50%;"/>-->
+	<div class="navList">
+		<div class="list1">
+			<div class="list1_top"><img src="img/save_black_icon.png"/></div>
+			<div class="list1_bottom">存</div>
+		</div>
+		<div class="list2">
+			<div class="list2_top"><img src="img/take_blue_icon.png"/></div>
+			<div class="list2_bottom" style="color:#00aaee">取</div>
+		</div>
+		<div class="list3">
+			<div class="list3_top"><img src="img/warehouse_black_icon.png"/></div>
+			<div class="list3_bottom">自助仓</div>
+		</div>
+	</div>
+	<div class="titleInfo">
+		<a href="" class="ustop_scan" id="openDoorID"><img src="img/km.png"></a>
+		<img src="" class="blur"/>
+		<div class="circleInfo">
+			<img src="" class="circleImg" />
+		</div>
+		<p class="personl"></p>
+	</div>
+	<div class="nav">
+		<div  class="recList">
+			<div class="recList_txt">当前订单</div>
+			<img class="currentImg" src="img/current_order_white_icon.png" />
+		</div>
+		<div  class="histList">
+			<div class="histList_txt">历史订单</div>
+			<img class="hisImg" src="img/history_order_blue.png"/>
+		</div>
+		<div  class="couLists">
+			<div class="couLists_txt">优惠券</div>
+			<img class="conponImg" src="img/coupon_blue_icon.png"/>
+		</div>
+		<div class="triangle"></div>
+		<div class="rect"></div>
+	</div>
+	<div class="removeAlert">
+		<div class="remove_top">是否删除订单？</div>
+		<div class="remove_bottom">
+			<div class="left">取消</div>
+			<div class="right">删除</div>
+		</div>
+	</div>
+	<div class="transparent"></div>
+	<!--当前订单-->
+	<div class="orderList" id="orderList">
+
+	</div>
+	<!--历史订单-->
+ 	<div class="hisList" id="hisList">
+
+	</div>
+	<div class="zwdd2">无历史订单</div>
+	<div class="zwdd">暂无订单</div>
+	<!--优惠券信息-->
+	<div class="couponList" id="couponList">
+		<div class="couponTxt" style="display:none">当前没有优惠券可用</div>
+		<div class="useStamp" style="margin-bottom:.3rem;margin-top:.32rem">
+			<div class="text">绑定优惠券</div>
+			<input class="stampInput" value="" placeholder="输入优惠券编码"/>
+			<div class="bind">绑定</div>
+		</div>
+	</div>
+</body>
+</html>

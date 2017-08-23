@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false"
+         monitoring="autodetect" dynamicConfig="true">
+    <diskStore path="java.io.tmpdir" />
+
+    <defaultCache maxElementsInMemory="10000" eternal="false" name="default"
+                  overflowToDisk="true" timeToLiveSeconds="120"
+                  maxElementsOnDisk="10000000" diskPersistent="false"
+                  diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="FIFO" />
+    <!-- 全局缓存 -->
+    <cache maxElementsInMemory="10000" eternal="false" name="weixin"
+           overflowToDisk="true" timeToLiveSeconds="7500"
+           maxElementsOnDisk="10000000" diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="FIFO" />
+</ehcache>

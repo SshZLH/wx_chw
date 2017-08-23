@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>续费</title>
+    <link rel="stylesheet" href="/web/whc/common/css/init.css" />
+    
+    <link rel="stylesheet" href="css/css.css"/>
+    <link rel="stylesheet" href="css/coupons.css"/>
+     <link rel="stylesheet" href="css/timeSilder.css"/>
+    <link rel="stylesheet" href="css/mobiscroll.2.13.2.css"/>
+    <style>
+    	.on{ opacity:0.6; }
+    	.demo1 { display: none; }
+        .demo2 { display: none; }
+        .demo3 { display: none; }
+		#box1{ width: 80%; height: 45%;position:absolute;top:20%;left:10%;}
+        #box2{ width: 80%; height: 45%;position:absolute;top:20%;left:10%;}
+        #box3{ width: 80%; height: 45%;position:absolute;top:20%;left:10%;}
+        .price_des1{
+        	width:80%;
+        	height:1.32rem;
+        	position:absolute;
+        	bottom:1.52rem;
+        	left:10%;
+        	color:#575757;
+        	font-size:.3rem;
+        	display:none;
+        	text-align:center
+        }
+        .price_des2{
+        	width:80%;
+        	height:1.32rem;
+        	position:absolute;
+        	bottom:1.52rem;
+        	left:10%;
+        	color:#575757;
+        	font-size:.3rem;
+        	display:none;
+        	text-align:center
+        }
+        .price_des3{
+        	width:80%;
+        	height:1.32rem;
+        	position:absolute;
+        	bottom:1.52rem;
+        	left:10%;
+        	color:#575757;
+        	font-size:.3rem;
+        	display:none;
+        	text-align:center
+        }  
+        .numberTime{
+        	width:4.48rem;
+        }
+        .numberTime span{
+        	position:absolute;
+        	right:.7rem
+        }     
+    </style>
+    <script src="../common/js/init.js"></script>     
+    <script src="js/init.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/mobiscroll.2.13.2.js"></script>
+	<script src="js/renew.js"></script>
+	<script src="js/agreement.js"></script>
+	
+    <script type="text/javascript">
+     
+   		
+    </script>
+</head>
+<body>
+		<div id="div1" class="slideChange">
+
+			<div id="slideTime" class="slideTime">
+				
+			</div>	
+			<div id="boxList">
+				<div id="box1" class="boxSid">
+			    	<span style="font-size:.34rem;font-weight:1em;color:#f7ab00;display:none">已选</span>
+			    	<select class="sel" name="City" id="demo1" style="width:10%;border: none;font-size:.34rem;display:none">
+						<option value="1">1小时</option>
+					    <option value="2">2小时</option>
+					    <option value="3">3小时</option>
+					    <option value="4">4小时</option>
+					    <option value="5">5小时</option>
+					    <option value="6">6小时</option>
+					    <option value="7">7小时</option>
+					    <option value="8">8小时</option>
+					    <option value="9">9小时</option>
+					    <option value="10">10小时</option>
+					    <option value="11">11小时</option>
+					    <option value="12">12小时</option>
+					    <option value="13">13小时</option>
+					    <option value="14">14小时</option>
+					    <option value="15">15小时</option>
+					    <option value="16">16小时</option>
+					    <option value="17">17小时</option>
+					    <option value="18">18小时</option>
+					    <option value="19">19小时</option>
+					    <option value="20">20小时</option>
+					    <option value="21">21小时</option>
+					    <option value="22">22小时</option>
+					    <option value="23">23小时</option>
+					    <option value="24">24小时</option>
+				</select>
+			</div>
+			<div id="box2" class="boxSid">
+			    <span style="font-size:.34rem;font-weight:1em;color:#f7ab00;display:none">已选</span>
+			    <select class="sel" name="City" id="demo2" style="width:10%;border: none;font-size:.34rem;display:none">
+				    <option value="0">0</option>
+				    <option value="1">1天</option>
+				    <option value="2">2天</option>
+				    <option value="3">3天</option>
+				    <option value="4">4天</option>
+				    <option value="5">5天</option>
+				    <option value="6">6天</option>
+				    <option value="7">7天</option>
+				    <option value="8">8天</option>
+				    <option value="9">9天</option>
+				    <option value="10">10天</option>
+				    <option value="11">11天</option>
+				    <option value="12">12天</option>
+				    <option value="13">13天</option>
+				    <option value="14">14天</option>
+				    <option value="15">15天</option>
+				    <option value="16">16天</option>
+				    <option value="17">17天</option>
+				    <option value="18">18天</option>
+				    <option value="19">19天</option>
+				    <option value="20">20天</option>
+				    <option value="21">21天</option>
+				    <option value="22">22天</option>
+				    <option value="23">23天</option>
+				    <option value="24">24天</option>
+				    <option value="25">25天</option>
+				    <option value="26">26天</option>
+				    <option value="27">27天</option>
+				    <option value="28">28天</option>
+				    <option value="29">29天</option>
+				    <option value="30">30天</option>
+				    <option value="31">31天</option>
+
+				</select>
+			</div>
+			<div id="box3" class="boxSid">
+			    <span style="font-size:.34rem;font-weight:1em;color:#f7ab00;display:none">已选</span>
+			    <select class="sel" name="City" id="demo3" style="width:10%;border: none;font-size:.34rem;position:absolute;left:.9rem;display:none">
+					<option value="0">0</option>
+				    <option value="1">1月</option>
+				    <option value="2">2月</option>
+				    <option value="3">3月</option>
+				    <option value="4">4月</option>
+				    <option value="5">5月</option>
+				    <option value="6">6月</option>
+				    <option value="7">7月</option>
+				    <option value="8">8月</option>
+				    <option value="9">9月</option>
+				     <option value="10">10月</option>
+				    <option value="11">11月</option>
+				    <option value="12">12月</option>
+				</select>
+			</div>
+		</div>
+		<div class="line axis"></div>
+		<div class="price_des1">
+			
+		</div>
+		<div class="price_des2">
+			
+		</div>
+		<div class="price_des3" >
+			
+		</div>		
+		<div class="line_bottom">
+			<div class="left">取消</div>
+			<div class="right"><font color="#00aaee">确定</font></div>
+		</div>
+ </div>
+ <div id="fillTxt" style="width:7.5rem;">
+	<!--头部信息-->
+	<div class="titleInfo" id="headerDivID">
+		
+	</div>
+	<!--柜子型号-->
+	<div class="orderDetail">
+		<div class="address">店名</div>
+		<div class="orderNumber">柜号</div>
+	</div>
+	<div class="orderTime" style="margin-bottom:0">
+		<div class="text">选择续费时长</div>
+		<div id="rentTime" class="numberTime">
+			<span>2小时</span>
+			<img src="img/right.png"/>
+		</div>
+	</div>
+	<div class="csxx" style="color:#4caced;font-size:.3rem;text-align:center;width:7.5rem;height:.9rem;line-height:.9rem">您已超时32分钟,最低续费时长1小时</div>
+	<div class="memberInfo">
+		<div class="info">
+			<div class="top">
+				<div class="name">姓名</div>
+				<input class="nameInput" value="请输入姓名" readOnly="true"/>
+			</div>
+			<div class="line"></div>
+			<div class="bottom">
+				<div class="phoneNumber">联系电话</div>
+				<input class="phoneInput" value="请输入手机号" readOnly="true"/>
+				<!--<div class="phoneInput">请输入手机号</div>-->
+			</div>
+		</div>
+	</div>
+	<div class="clause">
+		<input id="ckbox" checked="checked" type="checkbox">
+		<div class="agree">下单表示您已同意</div>
+		<a class="agreement" href="#">《用户使用协议》</a>
+			
+	</div>
+	<div class="payment">
+		<div id="price" class="money">2.00元</div>
+		<div class="payButton">去支付</div>
+	</div>
+	<div class="transparent"></div>
+	<div class="userSay">
+		<div class="title">用户使用协议</div>
+		<div class="content">	 
+		</div>
+		<div class="bottom">我知道了</div>
+	</div>
+</div>
+
+
+<div style="display:none">
+	<input type="hidden" name="memberName" id ="memberNameInput">
+	<input type="hidden" name="memberTel" id ="memberTelInput">
+	<input type="hidden" name="startDate" id ="startDateInput">
+	<input type="hidden" name="endDate" id ="endDateInput">
+	<input type="hidden" name="total" id ="totalInput" >
+	<input type="hidden" name="wahoceId" id ="wahoceIdInput">
+	<input type="hidden" name="openId" id="openIdInput"/>
+	<input type="hidden" name="rentalTime" id ="rentalTimeInput">
+	<input type="hidden" name="rentalDay" id ="rentalDayInput">
+	<input type="hidden" name="number" id="numberInput" value="" /><!--时长-->
+	<input type="hidden" name="unit" id="unitInput" value="" /><!--租用单位-->
+</div>
+<!-- 客服电话 -->
+<div class="telDiv" id="telDivID" style="display: none;">
+</div>
+<script type="text/javascript">
+	initHeader("headerDivID", "订单续费");
+	initCSPhone("telDivID");
+</script>	
+</body>
+</html>

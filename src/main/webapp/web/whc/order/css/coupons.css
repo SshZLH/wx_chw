@@ -1,0 +1,163 @@
+/*theme:填写订单 ;
+ * author:lxy;
+ * data:2017-02-27;
+ * */
+body{
+	background:#ededed;
+	font-family:simhei;
+}
+.titleInfo{
+	width:7.5rem;
+	height:.96rem;
+	background:#fff;
+}
+.titLeft{
+	width:1.02rem;
+	height:.96rem;
+/*	line-height: .96rem;*/
+	/*text-align:center;*/
+	/*vertical-align: middle;*/
+	/*margin:0 auto;*/
+	float:left;
+	display: flex;
+  	justify-content: center;
+  	align-items: center; 
+}
+.return{
+	
+	width:.28rem;
+	height:.49rem;
+}
+.selCab{
+	width:5.37rem;
+	height:.96rem;
+	line-height:.96rem;
+	float:left;
+	font-size:.4rem;
+	color: #5e5e5e;
+	font-family: simhei;
+	text-align: center;
+}
+.phone{
+	width:1.11rem;
+	height:.96rem;
+	float:left;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+.phone img{
+	width:.31rem;
+	height:.41rem;
+}
+.useStamp{
+	width: 7.5rem;
+	height: .95rem;
+	margin-top:0.03rem;
+	background: #fff;
+}
+.useStamp .text{
+	width:2.28rem;
+	height:.95rem;
+	line-height:.95rem;
+	color:#646464;
+	font-size:.36rem;
+	text-align: left;
+	text-indent:.2rem ;
+	float:left;
+}
+.stampInput{
+	width:3.95rem;
+	height:.95rem ;
+	line-height:.95rem;
+	color:#A9A9A9 ;
+	font-size:.34rem;
+	float: left;
+}
+.useStamp .bind{
+	float: left;
+	width:1.27rem;
+	height:.95rem;
+	line-height:.95rem;
+	color:#00AAEE;
+	font-size:.36rem;
+	text-indent:.2rem;
+}
+.couponsList{
+	width:7.12rem;
+	/*height:2.04rem;*/
+	margin:.3rem auto 0 ;
+}
+.couponsInfo{
+	width:7.12rem;
+	height:2.04rem;
+	background:#fff;
+	margin-bottom:.3rem;
+	position:relative;
+	
+}
+.infoName{
+	width:5.22rem;
+	height:2.04rem;
+	/*background:blue;*/
+	margin-left:.38rem;
+	line-height:2.04rem;
+}
+.infoName p{
+	font-size:.5525rem;
+	color:#ec5555;
+	height:1.39rem;
+	float:left;
+	/*border-right:0.02rem dashed #b5b5b5;*/
+}
+.yLine{
+	width:0.0001rem;
+	height:1.39rem;
+	border-right:0.02rem dashed #b5b5b5;
+	float:left;
+	margin-top:.34rem;
+	margin-left:.1rem;
+}
+.infoRight{
+	width:3.12rem;
+	height:1.39rem;
+	/*background:red;*/
+	float:left;
+	margin-top:.34rem;
+}
+.infoRight .top{
+	width:3.12rem;
+	height:.55rem;
+	line-height:.55rem;
+	/*background:#000;*/
+	font-size:.3329rem;
+	color:#474747;
+	text-indent:.32rem;
+}
+.infoRight .bottom{
+	width:4.12rem;
+	height:.84rem;
+	line-height:.84rem;
+	text-indent:.32rem;
+	/*background:blue;*/
+	font-size:.2497rem;
+	color:#9e9d9d;
+}
+.checkYes{
+	width:1.14rem;
+	height:1.14rem;
+	position:absolute;
+	right:0;
+	bottom:0;
+	display:none;
+}
+.onShow{
+	display:block
+}
+.ye{
+	width:.52rem;
+	height:.35rem;
+	position:absolute;
+	right:.12rem;
+	bottom:.1rem;
+}

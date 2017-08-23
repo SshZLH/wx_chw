@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" type="text/css" href="css/init.css" />
+		<link rel="stylesheet" href="css/toBePaid.css" />
+		<link rel="stylesheet" href="../common/css/init.css" />
+		<script type="text/javascript" src="js/init.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script src="../common/js/init.js"></script>
+		<style>
+			.transparent{
+				width:7.5rem;
+				height:100%;
+				z-index: 99;
+				background:#000;
+				opacity:.7;
+				display:none;
+				position:fixed;
+				top: 0;
+			}
+			table{
+				width:7.08rem;
+				height:2.7rem;
+				margin:auto;
+	
+
+			}
+			th{
+				border:.03rem solid #eeeeee;
+				color:#ababab;
+				font-size:.3rem;
+			}
+			.zfTime{
+				width:1.75rem;
+			}
+			.zfNum{
+				width:1.75rem;
+			}
+			td{
+				color:#6f6f6f;
+				font-size:.26rem;
+				text-align:center;
+				width:1.75rem;
+				border:.03rem solid #eeeeee;
+			}
+			.ddh{
+				width:3.3rem;
+				text-align:left;
+			}
+			.jydh{	
+				width:3.81rem;	
+			}
+		</style>
+		<script>
+			var orderId = getUrlParameter("orderId");
+			var orderInfo;
+		   $(function(){
+		   		 
+		 		$.ajax({
+			   		type: "get",
+					data:{"orderId":orderId},
+					url:"/getOrderInformation",
+					success:function(msg){
+							var json= msg.info;
+							orderInfo = json.orderInfo.data.orderInfo[0];
+							var unitName = orderInfo.orderUnit=="1"?" 小时": orderInfo.orderUnit=="2"?" 天" :orderInfo.orderUnit=="3"?" 月":"";
+							$("#statuName_wacaName").html(orderInfo.wahoName);
+							$("#statuName_sizeName").html( orderInfo.wahoceNumber + " 号 " + orderInfo.watyName);
+							$("#contactPeo_txt").html(orderInfo.nickName);
+							$("#contactTel_txt").html(orderInfo.tel);
+							$("#moneySum").html(orderInfo.orderAmount+"元");
+						 	 
+							//$("#orderTimeValue").html(json.orderInfo.totalTimes+ unitName);
+						 
+							$("#orderTime2").html(orderInfo.orderStartDate+"至"+orderInfo.orderEndDate);
+							$("#orderTimeEnd").html(orderInfo.orderReturnDate);
+							$("#orderNmubers").html(orderInfo.orderId)
+							var statusPic = orderInfo.status=="0" ? "order_detail_tobepaid_icon" :orderInfo.status=="2"? "history_order_finished" : "order_detail_underway_icon";
+							
+							$("#statusImg").attr('src','img/'+ statusPic +'.png');
+							var payListStr ='<table border="1"><th class="zfTime">支付时间</th><th class="zfNum">支付金额</th><th class="jydh">交易单号</th>';
+							for(var i=0; i<json.orderRenewInfoList.data.length; i++){
+								orderRenewInfoList=json.orderRenewInfoList.data[i];
+								payListStr += '<tr><td>' + orderRenewInfoList.date+'</td>'
+									+ '<td>¥' + orderRenewInfoList.money  + (i>0?'(续)':'')+ '</td>'
+									+ '<td>' + orderRenewInfoList.accountNummber + '</td></tr>';
+							}
+							payListStr = json.orderRenewInfoList.data.length==0 ? '<span class="keyTxt"></span>' : payListStr +	'</table>'   ;
+							$("#payTableID").html(payListStr);	
+						},
+						error:function(msg){
+							 alert(msg.info);
+						}
+		   		});
+		   		
+		   		$(".openDorr").on('click',function(){
+					openDoor(orderId);
+					window.location.href="/web/whc/member/openSuccess.html?cabinetDoorNo="+cabinetDoorNo;
+				});
+				$(".titLeft").on('click',function(){
+
+				window.history.go(-1);
+				})
+		   	})
+		</script>
+	</head>
+	<body>
+		<div class="telDiv" id="telDivID" style="display: none;"></div>
+		<div class="transparent"></div>
+		<div class="titInfo">
+			<div class="titLeft">
+				<img class="return" src="img/return.png"/>
+			</div>
+			<div class="selCab">
+				订单详情
+			</div>
+			<div class="phone" onclick="callCSPhone();">
+				<img class="telPhone" src="img/phone_icon.png"/>
+			</div>
+		</div>
+		<div class="statuName">
+			<div class="statuName_left">
+				<div class="waceName" id="statuName_wacaName"></div>
+				<div class="sizeName" id="statuName_sizeName"></div>
+			</div>
+			<div class="statuName_right"><img src="img/history_order_finished.png" alt="" id="statusImg" /></div>
+		</div>
+		<div class="contacts">
+			<div class="contacts_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos contactPeo">
+					<span class="keyTxt">联系人</span>
+					<p class="valueTxt" id="contactPeo_txt"></p>
+				</div>
+				<div class="pos contactTel">
+					<span class="keyTxt">联系电话</span>
+					<p class="valueTxt" id="contactTel_txt"></p>
+				</div>
+			</div>
+		</div>
+		<div class="orderNumber">
+			<div class="orders_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos amountMoney">
+					<span class="keyTxt">金额</span>
+					<p class="valueTxt" id="moneySum"></p>
+				</div>
+			 	<div class="pos orderTime">
+					<span class="keyTxt">时长</span>
+					<p class="valueTxt" id="orderTimeValue"></p>
+				</div>  
+				<div class="pos orderTime2">
+					<span class="keyTxt">订单时间</span>
+					<p class="valueTxt" id="orderTime2"></p>
+				</div>
+				<div class="pos quitTime">
+					<span class="keyTxt">退仓时间</span>
+					<p class="valueTxt" id="orderTimeEnd"></p>
+				</div>
+				<div class="pos orderNmubers">
+					<span class="keyTxt">订单编号</span>
+					<p class="valueTxt" id="orderNmubers"></p>
+				</div>				
+			</div>
+		</div>
+		<div class="zfjl">支付记录</div>
+		<div class="payTable" id="payTableID">
+		</div>
+		<script>
+		initCSPhone("telDivID");
+					
+		</script>
+	</body>
+</html>

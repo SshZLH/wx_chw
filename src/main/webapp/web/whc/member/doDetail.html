@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+	    <title>个人中心</title>
+	    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	    <meta http-equiv="description" content="this is my page">
+	    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="../common/css/init.css" />
+		<link rel="stylesheet" href="css/doDetail.css" />
+		<style>
+			.valueTxt{
+				color:#6f6f6f;
+			}
+		</style>
+		<script type="text/javascript" src="../common/js/init.js"></script>
+		<script type="text/javascript" src="../common/js/jquery-1.11.1.min.js"></script>
+		<script>
+			var jsonOpen;
+			var orderId = getUrlParameter("orderId");
+			var openId;
+			var aboveRentTime=null;
+			var orderInfo;
+		   	//开门指令
+			//获的订单信息
+		   $(function(){
+		 		$.ajax({
+			   		type: "post",
+					data:{"orderId":orderId},
+					url:"/getOrderInformation",
+					success:function(msg){
+							var json= msg.info;
+						//	 alert("json"+json.orderInfo.data.orderInfo[0].orderId);
+							orderInfo = json.orderInfo.data.orderInfo[0];
+						//	alert("orderInfo"+orderInfo.orderId);
+							console.log(json);
+							openId=orderInfo.openId;
+							var unitName = orderInfo.orderUnit=="1"?" 小时": orderInfo.orderUnit=="2"?" 天" : " 个月";
+							$("#statuName_wacaName").html(orderInfo.wahoName);
+							$("#statuName_sizeName").html(orderInfo.wahoceNumber+"号柜");
+							$("#contactPeo_txt").html(orderInfo.nickName);
+							$("#contactTel_txt").html(orderInfo.tel);
+							$("#moneySum").html(orderInfo.orderAmount+"元");
+							if(orderInfo.orderUnit=="1"){
+								$("#orderTimeValue").html(orderInfo.totalTimes+ unitName);
+							}else{
+								$("#orderTimeValue").html(orderInfo.orderNumber+ unitName);
+							}
+							aboveRentTime=orderInfo.totalTimes;
+							$("#orderTime2").html(orderInfo.orderStartDate+"至"+orderInfo.orderEndDate);
+							$("#orderTimeEnd").html(orderInfo.orderReturnDate);
+							$("#orderNmubers").html(orderInfo.orderId)
+						},
+						error:function(msg){
+							 alert(msg.info);
+						}
+		   		});
+				$(".titLeft").on('click',function(){
+					var orderCenterUrl="/web/whc/member/center.html?openId="+openId;
+					window.location.href=orderCenterUrl;
+				})
+		   	})
+
+		</script>
+	</head>
+	<body>
+		<!--开锁窗口-->
+	<div class="CloseOrder" style="border-radius:.1rem;">
+		<div class="top1" style="border-top-left-radius:.1rem;border-top-right-radius:.1rem;">开锁后,是否结束订单?</div>
+		<div class="midium1"><span>是</span><span class="tx">(取物后请关门)</span></div>
+		<div class="midium2" style="border-bottom-left-radius:.1rem;border-bottom-right-radius:.1rem;margin-bottom:.16rem">否,只是暂时开柜</div>
+	</div>
+	<div class="qxzh" style="margin-top:.3rem;border-radius:.1rem;z-index:9999">取消</div>
+
+		<!--头部信息-->
+		<div class="titleInfo" id="headerDivID"></div>
+		
+		<div class="statuName">
+			<div class="statuName_left">
+				<div class="waceName" id="statuName_wacaName"></div>
+				<div class="sizeName" id="statuName_sizeName"></div>
+			</div>
+			<div class="statuName_right"><img src="/web/whc/member/img/order_detail_underway_icon.png" alt="" /></div>
+		</div>
+		<div class="contacts">
+			<div class="contacts_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos contactPeo">
+					<span class="keyTxt">联系人</span>
+					<p class="valueTxt" id="contactPeo_txt"></p>
+				</div>
+				<div class="pos contactTel">
+					<span class="keyTxt">联系电话</span>
+					<p class="valueTxt" id="contactTel_txt"></p>
+				</div>
+			</div>
+		</div>
+		<div class="orderNumber">
+			<div class="orders_dat">
+				<!--<div class="contacts"></div>-->
+				<div class="pos amountMoney">
+					<span class="keyTxt">金额</span>
+					<p class="valueTxt" id="moneySum"></p>
+				</div>
+				<div class="pos orderTime">
+					<span class="keyTxt">时长</span>
+					<p class="valueTxt" id="orderTimeValue"></p>
+				</div>
+				<div class="pos orderTime2">
+					<span class="keyTxt">订单时间</span>
+					<p class="valueTxt" id="orderTime2"></p>
+				</div>
+				<div class="pos orderNmubers">
+					<span class="keyTxt">订单编号</span>
+					<p class="valueTxt" id="orderNmubers"></p>
+				</div>				
+			</div>
+		</div>
+		<!-- 客服电话 -->
+		<div class="transparent"></div>
+		<div class="telDiv" id="telDivID" style="display: none;">
+		</div>		
+		<script type="text/javascript">
+			initHeader("headerDivID", "订单详情");
+			initCSPhone("telDivID");
+		</script>
+	</body>
+	
+</html>

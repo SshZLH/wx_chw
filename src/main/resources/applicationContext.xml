@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+		default-autowire="byName"
+        >
+    <task:annotation-driven/>
+    <!-- 1. 扫描注解 -->
+    <context:component-scan base-package="org.simpro.*,com.whc.*,redis.*"></context:component-scan>
+    <!--property文件属性解密-->
+    <bean id="propertyConfigurer" class="com.wanhuchina.common.util.zk.ZookeeperPropertySupport">
+        <property name="locations">
+            <list>
+                <value>classpath*:zk.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+
+    <!-- 可以通过 ApplicationContext 获取Bean -->
+    <bean id="SpringContextUtil" class="com.wanhuchina.common.util.springcontext.SpringContextUtil" scope="singleton"/>
+
+</beans>
